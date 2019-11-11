@@ -13,7 +13,6 @@ import java.util.Arrays;
 import java.util.List;
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -52,7 +51,7 @@ public class TestController extends ApplicationTests
 
   @Test
   public void testRetrieveMovieListByParam() throws Exception{
-    when(starWarMovieService.retrieveStarWarMovieListBySortParam("0.0.0.0", "episode")).thenReturn(expectListSortedByEpisode);
+    when(starWarMovieService.retrieveStarWarMovieListBySortParam(anyString(), anyString(), anyString())).thenReturn(expectListSortedByEpisode);
     String actualResult = mainController.retrieveMovieListByParam(mockRequest, "episode");
     Assert.assertEquals(expectReturnJson, actualResult);
   }
@@ -63,7 +62,7 @@ public class TestController extends ApplicationTests
 
     when(mockRequest.getRemoteAddr()).thenReturn("127.0.0.1");
     mainController.storeFavouriteMovie(mockRequest, favouriteMovie);
-    verify(starWarMovieService, times(1)).storeFavouriteMovieRequest(anyString(), anyObject());
+    verify(starWarMovieService, times(1)).storeFavouriteMovieRequest(anyString(), anyString(), anyObject());
 
   }
 }
