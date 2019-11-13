@@ -1,8 +1,8 @@
-#####  Start up back-end app with debug mode
+- #####  Start up back-end app with debug mode
 `~/spa-git$ mvn spring-boot:run -Dagentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5008`
 
-##### back-end swagger-ui
-- http://localhost:9090/swagger-ui.html
+- ##### Access back-end swagger-ui
+http://localhost:9090/swagger-ui.html
 
 ##### MYSQL DB
 MYSQL DB Install and start up properly in the local machine.
@@ -11,8 +11,8 @@ the root user/password is same as the one in the application.properties under
 src/main/resources/application.properties.
 
 
-##### Run front-end app
+- ##### Run front-end app
 `~/spa-git/material-kit-react-master$ npm run install:clean`
 
-#####  Access the front-end ui
-- http://localhost:3000/
+- #####  Access the front-end ui
+http://localhost:3000/
