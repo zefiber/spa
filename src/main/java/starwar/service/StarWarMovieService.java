@@ -107,9 +107,9 @@ public class StarWarMovieService
 			Movie movie = new Movie();
 			if(imdbId !=null){
 				movie.setImdbId(imdbId);
-				movie.setRelease(positionObj.get("release").isJsonNull()?"":positionObj.get("release").getAsString());
-				movie.setEpisode(positionObj.get("episode").isJsonNull()?"":positionObj.get("episode").getAsString());
-				movie.setMachete(positionObj.get("machete").isJsonNull()?"":positionObj.get("machete").getAsString());
+				movie.setRelease(positionObj.get("release").isJsonNull()?null:positionObj.get("release").getAsString());
+				movie.setEpisode(positionObj.get("episode").isJsonNull()?null:positionObj.get("episode").getAsString());
+				movie.setMachete(positionObj.get("machete").isJsonNull()?null:positionObj.get("machete").getAsString());
 				movie.setImage("http://img.omdbapi.com/?i=" + jsonObject.get("imdbId").getAsString() + "&apikey=57ec2f6d");
 				retList.add(movie);
 			}

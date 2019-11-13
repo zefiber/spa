@@ -8,17 +8,13 @@ if [ -z "$1"] ;then
 fi
 
 if [ "$version" = "" ] ;then
-  version="0.0.7"
+  version="0.1.0"
 fi
 
-echo zefiber/spa:$version
+echo zefiber/spa
 
 
 
-docker tag spa:$version zefiber/spa:$version
-#docker push zefiber/springdockerk8sdemo:$version
+docker tag spa:$version zefiber/spa
 
-# kubectl --namespace=jx delete deployment springdockerk8s-deployment
-# kubectl --namespace=jx delete service springdocker-service
-# kubectl --namespace=jx create -f springdocker-deployment.yaml
-# kubectl --namespace=jx set image deployment/springdockerk8s-deployment springdockerk8s=zefiber/springdockerk8sdemo:$version
+
