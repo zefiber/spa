@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,14 +42,12 @@ public class MainController
     return json;
   }
 
-  @RequestMapping (value= "/storeFavouriteMovie", method = RequestMethod.POST)
-  public UserFavouriteMovie storeFavouriteMovie(@Context HttpServletRequest requestContext, String json) {
+  @RequestMapping (value= "/storeFavouriteMovie", method = RequestMethod.GET)
+  public UserFavouriteMovie storeFavouriteMovie(@Context HttpServletRequest requestContext, @RequestParam String imdbId) {
     String ip = requestContext.getRemoteAddr();
-    String requestQuery = requestContext.getRequestURI() + "&json=" + json;
+    String requestQuery = requestContext.getRequestURI() + "&imdbId=" + imdbId;
 
-    Gson gson = new Gson();
-    UserFavouriteMovie userFavouriteMovie = gson.fromJson(json, UserFavouriteMovie.class);
-    return starWarMovieService.storeFavouriteMovieRequest(ip, requestQuery, userFavouriteMovie);
+    return starWarMovieService.storeFavouriteMovieRequest(ip, requestQuery, imdbId);
   }
 
   public void setStarWarMovieService(StarWarMovieService starWarMovieService){

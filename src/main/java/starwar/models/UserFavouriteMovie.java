@@ -2,6 +2,9 @@ package starwar.models;
 
 public class UserFavouriteMovie
 {
+  public UserFavouriteMovie() {
+  }
+
   public UserFavouriteMovie(Integer id, Integer ipAddress, String imdbId) {
     this.id = id;
     this.ipAddress = ipAddress;

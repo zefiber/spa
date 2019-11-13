@@ -61,11 +61,11 @@ public class StarWarMovieSortUtility{
 	{
 
 		@Override public int compare(Movie o1, Movie o2) {
-			if ("".equalsIgnoreCase(o1.getMachete() ) && "".equalsIgnoreCase(o2.getMachete()))
+            if (o1.getMachete() == null && o2.getMachete() == null)
                     return 0;
-                if ("".equalsIgnoreCase(o1.getMachete()))
+                if (o1.getMachete() == null)
                     return 1;
-                else if ("".equalsIgnoreCase(o2.getMachete()))
+                else if (o2.getMachete() == null)
                     return -1;
 			return Integer.parseInt(o1.getMachete()) - Integer.parseInt(o2.getMachete());
 		}

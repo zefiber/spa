@@ -30,11 +30,11 @@ public class StarWarMovieSortUtilityTests extends ApplicationTests
   public void setup()
   {
     movieList = new ArrayList<>();
-    Movie movie1 = new Movie("tt2488491", "aaa", "aaa", "5", "2", "2" );
-    Movie movie2 = new Movie("tt2488492", "bbb", "bbb", "7", "7", "6" );
-    Movie movie3 = new Movie("tt2488493", "ccc", "ccc", "1", "4", null );
-    Movie movie4 = new Movie("tt2488494", "ddd", "ddd", "3", "6", "4" );
-    Movie movie5 = new Movie("tt2488495", "eee", "eee", "2", "5", "3" );
+    Movie movie1 = new Movie("tt2488491", "aaa", "aaa", "5", "2", "2","image1" );
+    Movie movie2 = new Movie("tt2488492", "bbb", "bbb", "7", "7", "6", "image2" );
+    Movie movie3 = new Movie("tt2488493", "ccc", "ccc", "1", "4", null, "image3" );
+    Movie movie4 = new Movie("tt2488494", "ddd", "ddd", "3", "6", "4", "image4" );
+    Movie movie5 = new Movie("tt2488495", "eee", "eee", "2", "5", "3", "image5" );
 
     movieList.add(movie1);
     movieList.add(movie2);

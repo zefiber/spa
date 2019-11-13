@@ -6,8 +6,6 @@ import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import IconButton from '@material-ui/core/IconButton';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
-// import tileData from './tileData';
-
 import axios from 'axios';
 
 const useStyles = makeStyles(theme => ({
@@ -34,23 +32,36 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+export function storeFavouriteMovie(imdbId){
+  console.log("move:"+imdbId);
+  axios.get("http://localhost:9090/storeFavouriteMovie",
+    {params: { imdbId: imdbId }}
+  )
+  .then((response) => {
+    console.log(response);
+  }, (error) => {
+    console.log(error);
+  });
+}
 
 export default function AdvancedGridList(props) {
     const classes = useStyles();
     const [data, setData] = useState([]);
     const [sortState, setSortState] = useState(props);
 
-    //console.log(sortState)
+  
 
   useEffect(() => {
       const fetchData = async() => {
       const result = await axios('http://localhost:9090/retrieveMovieList?sortParam=' + sortState.sort);
       setData(result.data);
+      console.log(result.data)
     };
       setSortState(props);
       fetchData();
   }, [props]);
 
+ 
   
     return (
       <div className={classes.root}>

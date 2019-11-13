@@ -64,13 +64,15 @@ public class StarWarMovieService
 
   }
 
-  public UserFavouriteMovie storeFavouriteMovieRequest(String ip, String query, UserFavouriteMovie userFavouriteMovie) {
+  public UserFavouriteMovie storeFavouriteMovieRequest(String ip, String query, String imdbId) {
 
 	UserRequest userRequest = new UserRequest();
     userRequest.setIpAddress(ipStringToInt(ip));
     userRequest.setReqQuery(query);
     storeUserRequest(userRequest);
 
+    UserFavouriteMovie userFavouriteMovie = new UserFavouriteMovie();
+	userFavouriteMovie.setImdbId(imdbId);
     userFavouriteMovie.setIpAddress(!"".equalsIgnoreCase(ip)? ipStringToInt(ip): 0);
 	return starWarMovieRepository.saveFavouriteMovie(userFavouriteMovie);
   }
