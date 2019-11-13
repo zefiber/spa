@@ -9,20 +9,19 @@ public class Movie
   private String release;
   private String machete;
 
+
+  private String image;
+
   public Movie(){}
 
-  public Movie(String imdbId, String movieTitle, String actors, String episode, String release, String machete) {
+  public Movie(String imdbId, String movieTitle, String actors, String episode, String release, String machete, String image) {
     this.imdbId = imdbId;
     this.movieTitle = movieTitle;
     this.actors = actors;
     this.episode = episode;
     this.release = release;
     this.machete = machete;
-  }
-
-  @Override public String toString() {
-    return "Movie{" + "imdbId='" + imdbId + '\'' + ", movieTitle='" + movieTitle + '\'' + ", actors='" + actors + '\'' + ", episode='" + episode
-            + '\'' + ", release='" + release + '\'' + ", machete='" + machete + '\'' + '}';
+    this.image = image;
   }
 
 
@@ -74,5 +73,16 @@ public class Movie
     this.machete = machete;
   }
 
+  public String getImage() {
+    return image;
+  }
 
+  public void setImage(String image) {
+    this.image = image;
+  }
+
+  @Override public String toString() {
+    return "Movie{" + "imdbId='" + imdbId + '\'' + ", movieTitle='" + movieTitle + '\'' + ", actors='" + actors + '\'' + ", episode='" + episode
+            + '\'' + ", release='" + release + '\'' + ", machete='" + machete + '\'' + ", image='" + image + '\'' + '}';
+  }
 }

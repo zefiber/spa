@@ -1,5 +1,5 @@
 //advancedGridList begin
-import React from 'react';
+import React, {useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
@@ -7,9 +7,9 @@ import GridListTileBar from '@material-ui/core/GridListTileBar';
 import IconButton from '@material-ui/core/IconButton';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 // import tileData from './tileData';
-import studio1 from "assets/img/examples/studio-1.jpg";
-import studio2 from "assets/img/examples/studio-2.jpg";
-import studio3 from "assets/img/examples/studio-3.jpg";
+
+import axios from 'axios';
+
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
@@ -34,59 +34,34 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-/**
- * The example data is structured as follows:
- *
- * import image from 'path/to/image.jpg';
- * [etc...]
- *
- * const tileData = [
- *   {
- *     img: image,
- *     title: 'Image',
- *     author: 'author',
- *     featured: true,
- *   },
- *   {
- *     [etc...]
- *   },
- * ];
- */
-//advancedGridList end
 
-const tileData = [
-       {
-         img: studio1,
-         title: 'Image1',
-         author: 'author1',
-         featured: true
-       },
-       {
-         img: studio2,
-         title: 'Image2',
-         author: 'author2',
-         featured: true,
-       },
-       {
-        img: studio3,
-        title: 'Image3',
-        author: 'author3',
-        featured: true,
-      }
-     ];
-
-export default function AdvancedGridList() {
+export default function AdvancedGridList(props) {
     const classes = useStyles();
+    const [data, setData] = useState([]);
+    const [sortState, setSortState] = useState(props);
+
+    //console.log(sortState)
+
+  useEffect(() => {
+      const fetchData = async() => {
+      const result = await axios('http://localhost:9090/retrieveMovieList?sortParam=' + sortState.sort);
+      setData(result.data);
+    };
+      setSortState(props);
+      fetchData();
+  }, [props]);
+
   
     return (
       <div className={classes.root}>
-        <GridList cellHeight={200} spacing={1} className={classes.gridList}>
-          {tileData.map(tile => (
-            <GridListTile key={tile.img} cols={tile.featured ? 2 : 1} rows={tile.featured ? 2 : 1}>
-              <img src={tile.img} alt={tile.title} /><div>aaa</div>
+        <GridList cellHeight={500} spacing={10} className={classes.gridList}>
+          {data.map(tile => (
+            <GridListTile key={tile.imdbId} cols={2} rows={1}>
+              <img src={tile.image} alt={tile.title} />
               <GridListTileBar
-                title={tile.title}
+                title={tile.movieTitle}
                 titlePosition="top"
+                subtitle={tile.actors}
                 actionIcon={
                   <IconButton aria-label={`star ${tile.title}`} className={classes.icon}>
                     <StarBorderIcon />
@@ -95,10 +70,9 @@ export default function AdvancedGridList() {
                 actionPosition="left"
                 className={classes.titleBar}
               />
-              bbb
             </GridListTile>
           ))}
-        </GridList>ccc
+        </GridList>
       </div>
     );
   }

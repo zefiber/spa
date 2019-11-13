@@ -100,12 +100,18 @@ public class StarWarMovieService
 		JsonArray starWarMovieList = new JsonParser().parse(retMsg).getAsJsonArray();
 		starWarMovieList.forEach(starWarMovie -> {
 			JsonObject jsonObject = starWarMovie.getAsJsonObject();
+			String imdbId = jsonObject.get("imdbId").getAsString();
+			JsonObject positionObj = jsonObject.get("position").getAsJsonObject();
 			Movie movie = new Movie();
-			movie.setImdbId(jsonObject.get("imdbId")!=null?jsonObject.get("imdbId").getAsString():null);
-			movie.setRelease(jsonObject.get("release")!=null?jsonObject.get("release").getAsString():null);
-			movie.setEpisode(jsonObject.get("release")!=null?jsonObject.get("episoe").getAsString():null);
-			movie.setMachete(jsonObject.get("release")!=null?jsonObject.get("machete").getAsString():null);
-			retList.add(movie);
+			if(imdbId !=null){
+				movie.setImdbId(imdbId);
+				movie.setRelease(positionObj.get("release").isJsonNull()?"":positionObj.get("release").getAsString());
+				movie.setEpisode(positionObj.get("episode").isJsonNull()?"":positionObj.get("episode").getAsString());
+				movie.setMachete(positionObj.get("machete").isJsonNull()?"":positionObj.get("machete").getAsString());
+				movie.setImage("http://img.omdbapi.com/?i=" + jsonObject.get("imdbId").getAsString() + "&apikey=57ec2f6d");
+				retList.add(movie);
+			}
+
 		} );
 
 		System.out.println("Output from Server .... \n");
@@ -128,7 +134,7 @@ public class StarWarMovieService
 		Client client = ClientBuilder.newClient();
 
 		WebTarget webTarget = client
-		   .target("http://www.omdbapi.com/?" + "i=" + imdbID + "&apikey=57ec2f6d");
+		   .target("http://www.omdbapi.com/?i=" + imdbID + "&apikey=57ec2f6d");
 
 		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
 
