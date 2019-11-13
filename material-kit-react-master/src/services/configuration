@@ -1,4 +1,0 @@
-class Configuration {
-  COLLECTION_URL = "http://localhost:9090/retrieveMovieList?sortParam=episode";
-}
-export default Configuration;

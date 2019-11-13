@@ -32,24 +32,24 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export function storeFavouriteMovie(imdbId){
-  console.log("move:"+imdbId);
-  axios.get("http://localhost:9090/storeFavouriteMovie",
-    {params: { imdbId: imdbId }}
-  )
-  .then((response) => {
-    console.log(response);
-  }, (error) => {
-    console.log(error);
-  });
-}
+
 
 export default function AdvancedGridList(props) {
     const classes = useStyles();
     const [data, setData] = useState([]);
     const [sortState, setSortState] = useState(props);
 
-  
+  function storeFavouriteMovie(imdbId){
+    console.log("move:"+imdbId);
+    axios.get("http://localhost:9090/storeFavouriteMovie",
+      {params: { imdbId: imdbId }}
+    )
+    .then((response) => {
+      console.log(response);
+    }, (error) => {
+      console.log(error);
+    });
+  }  
 
   useEffect(() => {
       const fetchData = async() => {
@@ -74,8 +74,8 @@ export default function AdvancedGridList(props) {
                 titlePosition="top"
                 subtitle={tile.actors}
                 actionIcon={
-                  <IconButton aria-label={`star ${tile.title}`} className={classes.icon}>
-                    <StarBorderIcon />
+                  <IconButton onClick={()=> storeFavouriteMovie(tile.imdbId)} aria-label={`star ${tile.title}`} className={classes.icon}>
+                    <StarBorderIcon/>
                   </IconButton>
                 }
                 actionPosition="left"
